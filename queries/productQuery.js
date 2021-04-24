@@ -1,29 +1,19 @@
 // TODO set up fragment for basic product info
 import gql from 'graphql-tag';
+
+import { REQURIED_PRODUCT_FIELDS } from './fragments';
+
 export const products = gql`
+	${REQURIED_PRODUCT_FIELDS}
+
 	query products($first: Int!, $channel: String!) {
 		products(first: $first, channel: $channel) {
 			edges {
 				node {
-					id
-					name
-					slug
-					category {
-						slug
-					}
-					thumbnail(size: 5) {
+					...CoreProductFields
+					thumbnail(size: 500) {
 						url
 						alt
-					}
-
-					pricing {
-						priceRange {
-							start {
-								net {
-									amount
-								}
-							}
-						}
 					}
 				}
 			}
@@ -31,20 +21,19 @@ export const products = gql`
 	}
 `;
 
+//Querying by slug to make URL pretty, would be better as ID if slug isn't indexed
 export const singleProduct = gql`
+	${REQURIED_PRODUCT_FIELDS}
+
 	query singleProduct($slug: String!, $channel: String!) {
 		product(slug: $slug, channel: $channel) {
-			id
-			name
-			slug
-			category {
-				slug
-			}
+			...CoreProductFields
+
 			description
 			seoTitle
 			seoDescription
 
-			thumbnail(size: 5) {
+			thumbnail(size: 500) {
 				url
 				alt
 			}
