@@ -1,6 +1,19 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
+export const Product = ({ product }) => {
+	if (!product) return null;
+
+	return (
+		<Link href={`/products/${product.category.slug}/${product.slug}`}>
+			<div>
+				<img src={product.thumbnail.url} alt={product.thumbnail.alt} />
+				{product.name}
+			</div>
+		</Link>
+	);
+};
+
 Product.propTypes = {
 	product: PropTypes.shape({
 		id: PropTypes.string.isRequired,
@@ -9,20 +22,9 @@ Product.propTypes = {
 		}),
 		name: PropTypes.string.isRequired,
 		slug: PropTypes.string.isRequired,
+		thumbnail: PropTypes.shape({
+			url: PropTypes.string.isRequired,
+			alt: PropTypes.string.isRequired,
+		}),
 	}),
 };
-
-export default function Product({ product }) {
-	if (!product) return null;
-
-	return (
-		<div key={product.id}>
-			<Link
-				href={`/products/${product.category.slug}/${product.slug}`}
-				key={product.id}
-			>
-				{product.name}
-			</Link>
-		</div>
-	);
-}

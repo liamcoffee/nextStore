@@ -1,11 +1,13 @@
-import Head from 'next/head';
-import styles from '../../../styles/Home.module.css';
+import styles from 'styles/Home.module.css';
 import PropTypes from 'prop-types';
 
-import { singleProduct } from '../../../queries/productQuery';
+import { singleProduct } from 'queries/productQuery';
 
-import { initializeApollo } from '../../../lib/apolloClient';
+import { initializeApollo } from 'lib/apolloClient';
 import { useQuery } from '@apollo/client';
+
+import { Header } from 'components/Header';
+import { CHANNEL } from 'lib/consts';
 
 const generateDescriptionBlock = (description) => {
 	return JSON.parse(description).blocks.map((block, i) => (
@@ -20,12 +22,11 @@ ProductPage.propTypes = {
 export default function ProductPage({ slug }) {
 	const {
 		data: { product },
-		loading,
 		error,
 	} = useQuery(singleProduct, {
 		variables: {
 			slug,
-			channel: 'uk',
+			channel: CHANNEL,
 		},
 	});
 
@@ -33,16 +34,9 @@ export default function ProductPage({ slug }) {
 		return <h1>Error</h1>;
 	}
 
-	console.log(`log`, JSON.parse(product.description).blocks);
-
-	console.log(`loggin`, loading, error);
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>{product.seoTitle}</title>
-				<link rel='icon' href='/favicon.ico' />
-				<meta name='description' content={product.seoDescription} />
-			</Head>
+			<Header title={product.seoTitle} description={product.seoDescription} />
 
 			{product.name}
 			{generateDescriptionBlock(product.description)}
@@ -58,7 +52,7 @@ export async function getServerSideProps({ query }) {
 		query: singleProduct,
 		variables: {
 			slug,
-			channel: 'uk',
+			channel: CHANNEL,
 		},
 	});
 

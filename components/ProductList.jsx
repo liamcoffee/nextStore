@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client';
-import Product from './product';
+import { Product } from './Product';
 import { products } from '../queries/productQuery';
+import PropTypes from 'prop-types';
 
-export default function ProductList() {
+export const ProductList = ({ channel, first }) => {
 	const {
 		data: {
 			products: { edges },
@@ -10,8 +11,8 @@ export default function ProductList() {
 		error,
 	} = useQuery(products, {
 		variables: {
-			first: 5,
-			channel: 'uk',
+			first,
+			channel,
 		},
 	});
 
@@ -20,8 +21,13 @@ export default function ProductList() {
 	return (
 		<>
 			{edges.map((product) => (
-				<Product key={product.node._id} product={product.node} />
+				<Product key={product.node.id} product={product.node} />
 			))}
 		</>
 	);
-}
+};
+
+ProductList.propTypes = {
+	channel: PropTypes.string.isRequired,
+	first: PropTypes.number.isRequired,
+};

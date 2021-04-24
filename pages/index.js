@@ -1,25 +1,19 @@
-import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Link from 'next/link';
 
-import { products } from '../queries/productQuery';
-import Product from '../components/product';
-import ProductList from '../components/ProductList';
-import { initializeApollo } from '../lib/apolloClient';
-import { useQuery } from '@apollo/client';
+import { products } from 'queries/productQuery';
+import { ProductList } from 'components/ProductList';
+import { Header } from 'components/Header';
+import { initializeApollo } from 'lib/apolloClient';
+import { CHANNEL } from 'lib/consts';
 
 export default function Home() {
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Create Next App</title>
-				<link rel='icon' href='/favicon.ico' />
-			</Head>
-
+			<Header title='soap shop' description='test' />
 			<main className={styles.main}>
 				<div>
 					<h1 style={{ textAlign: 'center' }}>Products</h1>
-					<ProductList />
+					<ProductList first={5} channel={CHANNEL} />
 				</div>
 			</main>
 			<footer className={styles.footer}>
@@ -48,7 +42,7 @@ export async function getServerSideProps() {
 		query: products,
 		variables: {
 			first: 5,
-			channel: 'uk',
+			channel: CHANNEL,
 		},
 	});
 
