@@ -18,5 +18,9 @@
   "devDependencies": {
     "eslint": "^7.25.0",
     "eslint-plugin-react": "^7.23.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/liamcoffee/nextStore.git",
+  "author": "<liambaxter01@gmail.com>",
+  "license": "MIT"
 }
