@@ -39,6 +39,7 @@ export default function ProductPage({ slug }) {
 			<Header title={product.seoTitle} description={product.seoDescription} />
 
 			{product.name}
+			<img src={product.thumbnail.url} alt={product.thumbnail.alt} />
 			{generateDescriptionBlock(product.description)}
 		</div>
 	);
