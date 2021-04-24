@@ -1,29 +1,28 @@
-import styles from '../styles/Home.module.css';
-
-import { products } from 'queries/productQuery';
-import { ProductList } from 'components/ProductList';
-import { Header } from 'components/Header';
-import { initializeApollo } from 'lib/apolloClient';
-import { CHANNEL } from 'lib/consts';
+import { products } from '@queries/productQuery';
+import { ProductList } from '@components/ProductList';
+import { Header } from '@components/Header';
+import { initializeApollo } from '@lib/apolloClient';
+import { CHANNEL } from '@lib/consts';
 
 export default function Home() {
 	return (
-		<div className={styles.container}>
+		<div>
 			<Header title='soap shop' description='test' />
-			<main className={styles.main}>
+			<main>
 				<div>
-					<h1 style={{ textAlign: 'center' }}>Products</h1>
+					<h1 role='heading' style={{ textAlign: 'center' }}>
+						SHOP!!
+					</h1>
 					<ProductList first={5} channel={CHANNEL} />
 				</div>
 			</main>
-			<footer className={styles.footer}>
+			<footer>
 				<a
 					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
 					target='_blank'
 					rel='noopener noreferrer'
 				>
-					Powered by{' '}
-					<img src='/vercel.svg' alt='Vercel Logo' className={styles.logo} />
+					Powered by <img src='/vercel.svg' alt='Vercel Logo' />
 				</a>
 			</footer>
 		</div>
