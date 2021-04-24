@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../../styles/Home.module.css';
-import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 import { singleProduct } from '../../../queries/productQuery';
 
@@ -8,9 +8,13 @@ import { initializeApollo } from '../../../lib/apolloClient';
 import { useQuery } from '@apollo/client';
 
 const generateDescriptionBlock = (description) => {
-	return JSON.parse(description).blocks.map((block) => (
-		<p dangerouslySetInnerHTML={{ __html: block.data.text }} />
+	return JSON.parse(description).blocks.map((block, i) => (
+		<p key={i} dangerouslySetInnerHTML={{ __html: block.data.text }} />
 	));
+};
+
+ProductPage.propTypes = {
+	slug: PropTypes.string.isRequired,
 };
 
 export default function ProductPage({ slug }) {

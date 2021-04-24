@@ -20,7 +20,7 @@ export default function ProductList() {
 	return (
 		<>
 			{edges.map((product) => (
-				<Product product={product.node} />
+				<Product key={product.node._id} product={product.node} />
 			))}
 		</>
 	);

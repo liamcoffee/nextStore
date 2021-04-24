@@ -1,5 +1,16 @@
-import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
+
+Product.propTypes = {
+	product: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		category: PropTypes.shape({
+			slug: PropTypes.string.isRequired,
+		}),
+		name: PropTypes.string.isRequired,
+		slug: PropTypes.string.isRequired,
+	}),
+};
 
 export default function Product({ product }) {
 	if (!product) return null;
