@@ -12,11 +12,15 @@ export const REQURIED_PRODUCT_FIELDS = gql`
 		pricing {
 			priceRange {
 				start {
-					net {
+					gross {
 						amount
+						currency
 					}
 				}
 			}
+		}
+		collections {
+			name
 		}
 	}
 `;

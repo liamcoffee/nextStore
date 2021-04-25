@@ -1,4 +1,4 @@
-// Generic box component extended with styled=system
+// Generic box component extended with styled-system
 
 import styled from 'styled-components';
 import {
@@ -8,6 +8,9 @@ import {
 	space,
 	layout,
 	grid,
+	typography,
+	position,
+	color,
 } from 'styled-system';
 
 export const Box = styled.div`
@@ -18,4 +21,7 @@ export const Box = styled.div`
 	${layout};
 	${flexbox};
 	${grid};
+	${typography};
+	${position};
+	${color};
 `;

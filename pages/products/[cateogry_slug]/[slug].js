@@ -1,4 +1,3 @@
-import styles from 'styles/Home.module.css';
 import PropTypes from 'prop-types';
 
 import { singleProduct } from 'queries/productQuery';
@@ -9,8 +8,10 @@ import { useQuery } from '@apollo/client';
 import { Button } from '@components/Button';
 
 import { Header } from '@components/Header';
+import { Box } from '@components/Box';
 
 import { CHANNEL } from 'lib/consts';
+import { mapCurrencySymbol } from 'helpers';
 
 const generateDescriptionBlock = (description) => {
 	return JSON.parse(description).blocks.map((block, i) => (
@@ -33,19 +34,26 @@ export default function ProductPage({ slug }) {
 		},
 	});
 
+	console.log(`got prodcut`, product);
 	if (error) {
 		return <h1>Error</h1>;
 	}
 
 	return (
-		<div className={styles.container}>
+		<>
 			<Header title={product.seoTitle} description={product.seoDescription} />
+			<Box>
+				<img src={product.thumbnail.url} alt={product.thumbnail.alt} />
+			</Box>
+			<Box>
+				{product.name}
+				{generateDescriptionBlock(product.description)}
 
-			{product.name}
-			<img src={product.thumbnail.url} alt={product.thumbnail.alt} />
-			{generateDescriptionBlock(product.description)}
-			<Button>Buy Now</Button>
-		</div>
+				{mapCurrencySymbol[product.pricing.priceRange.start.gross.currency]}
+				{product.pricing.priceRange.start.gross.amount}
+				<Button>Buy Now</Button>
+			</Box>
+		</>
 	);
 }
 
