@@ -64,4 +64,5 @@ export const theme = {
 		'1.75rem',
 		'2rem',
 	],
+	breakpoints: ['40em', '52em', '81.25em'],
 };

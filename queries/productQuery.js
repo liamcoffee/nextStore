@@ -32,7 +32,7 @@ export const singleProduct = gql`
 			description
 			seoTitle
 			seoDescription
-
+			isAvailable
 			thumbnail(size: 500) {
 				url
 				alt

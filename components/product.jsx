@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Box } from '@components/Box';
 import { Text } from '@components/Text';
+
 const ProductGridImg = styled.img`
 	height: 100%;
 	width: 100%;
@@ -23,6 +24,7 @@ const ProductWrap = styled(Box)`
 
 export const Product = ({ product }) => {
 	if (!product) return null;
+
 	return (
 		<Link href={`/products/${product.category.slug}/${product.slug}`}>
 			<ProductWrap>

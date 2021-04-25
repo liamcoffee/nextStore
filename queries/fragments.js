@@ -10,6 +10,12 @@ export const REQURIED_PRODUCT_FIELDS = gql`
 		}
 
 		pricing {
+			onSale
+			discount {
+				gross {
+					amount
+				}
+			}
 			priceRange {
 				start {
 					gross {
