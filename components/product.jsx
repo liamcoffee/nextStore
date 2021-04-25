@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box } from '@components/Box';
-import { Text } from '@components/Text';
+import { Box } from './Box';
+import { Text } from './Text';
 
 const ProductGridImg = styled.img`
 	height: 100%;

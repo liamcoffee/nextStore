@@ -1,19 +1,15 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { singleProduct } from 'queries/productQuery';
+import { singleProduct } from "queries/productQuery";
 
-import { initializeApollo } from 'lib/apolloClient';
-import { useQuery } from '@apollo/client';
+import { initializeApollo } from "lib/apolloClient";
+import { useQuery } from "@apollo/client";
 
-import { Button } from '@components/Button';
+import { Button, Header, Box, Text } from "@components";
 
-import { Header } from '@components/Header';
-import { Box } from '@components/Box';
-import { Text } from '@components/Text';
-
-import { CHANNEL } from 'lib/consts';
-import { mapCurrencySymbol } from 'helpers';
+import { CHANNEL } from "lib/consts";
+import { mapCurrencySymbol } from "helpers";
 
 const generateDescriptionBlock = (description) => {
 	return JSON.parse(description).blocks.map((block, i) => (
@@ -59,9 +55,9 @@ export default function ProductPage({ slug }) {
 		<>
 			<Header title={product.seoTitle} description={product.seoDescription} />
 			<Box
-				display={['block', 'block', 'flex']}
-				justifyContent='center'
-				alignItems='center'
+				display={["block", "block", "flex"]}
+				justifyContent="center"
+				alignItems="center"
 			>
 				<Box width={[1, 1, 1 / 2]}>
 					<LargeProductImage
@@ -70,7 +66,7 @@ export default function ProductPage({ slug }) {
 					/>
 				</Box>
 				<Box width={[1, 1, 1 / 2]}>
-					<Text as='h1' text='h1'>
+					<Text as="h1" text="h1">
 						{product.name}
 					</Text>
 
@@ -82,7 +78,7 @@ export default function ProductPage({ slug }) {
 						: product.pricing.priceRange.start.gross.amount}
 
 					<br />
-					{product.isAvailable ? 'In stock' : 'out of stock'}
+					{product.isAvailable ? "In stock" : "out of stock"}
 
 					<br />
 
@@ -90,7 +86,7 @@ export default function ProductPage({ slug }) {
 
 					{generateDescriptionBlock(product.description)}
 
-					<QtyBox type='number' />
+					<QtyBox type="number" />
 					<Button>Buy Now</Button>
 				</Box>
 			</Box>

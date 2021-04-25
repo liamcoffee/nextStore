@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Product } from './Product';
 import { products } from '../queries/productQuery';
 import PropTypes from 'prop-types';
-import { Box } from '@components/Box';
+import { Box } from '@components';
 
 export const ProductList = ({ channel, first }) => {
 	const {
