@@ -6,7 +6,10 @@ import { singleProduct } from 'queries/productQuery';
 import { initializeApollo } from 'lib/apolloClient';
 import { useQuery } from '@apollo/client';
 
-import { Header } from 'components/Header';
+import { Button } from '@components/Button';
+
+import { Header } from '@components/Header';
+
 import { CHANNEL } from 'lib/consts';
 
 const generateDescriptionBlock = (description) => {
@@ -41,6 +44,7 @@ export default function ProductPage({ slug }) {
 			{product.name}
 			<img src={product.thumbnail.url} alt={product.thumbnail.alt} />
 			{generateDescriptionBlock(product.description)}
+			<Button>Buy Now</Button>
 		</div>
 	);
 }
