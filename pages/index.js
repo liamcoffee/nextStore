@@ -6,7 +6,7 @@ import { CHANNEL } from '@lib/consts';
 
 export default function Home() {
 	return (
-		<div>
+		<>
 			<Header title='soap shop' description='test' />
 			<main>
 				<div>
@@ -25,7 +25,7 @@ export default function Home() {
 					Powered by <img src='/vercel.svg' alt='Vercel Logo' />
 				</a>
 			</footer>
-		</div>
+		</>
 	);
 }
 

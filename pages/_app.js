@@ -4,13 +4,13 @@ import { theme } from '../styles/theme';
 import { ThemeProvider } from 'styled-components';
 
 import { createGlobalStyle } from 'styled-components';
+import { Layout } from '@components/Layout';
 
 const GlobalStyle = createGlobalStyle`
- 
-  * {
-    font-family: 'Open Sans', sans-serif;
-  }
-  all: unset;
+	* {
+		font-family: 'Open Sans', sans-serif;
+	}
+  	all: unset;
 	box-sizing: border-box;
 
 	&:hover,
@@ -27,9 +27,9 @@ export default function App({ Component, pageProps }) {
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
 				<ApolloProvider client={apolloClient}>
-					<div style={{ margin: '20px' }}>
+					<Layout>
 						<Component {...pageProps} />
-					</div>
+					</Layout>
 				</ApolloProvider>
 			</ThemeProvider>
 		</>
