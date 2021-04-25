@@ -12,7 +12,7 @@ export default function Home() {
 					<h1 role="heading" style={{ textAlign: "center" }}>
 						SHOP!!
 					</h1>
-					<ProductList first={5} channel={CHANNEL} />
+					<ProductList first={20} channel={CHANNEL} />
 				</div>
 			</main>
 			<footer>
@@ -39,7 +39,7 @@ export async function getServerSideProps() {
 	await apolloClient.query({
 		query: products,
 		variables: {
-			first: 5,
+			first: 20,
 			channel: CHANNEL,
 		},
 	});

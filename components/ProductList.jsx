@@ -1,21 +1,12 @@
 import { useQuery } from '@apollo/client';
 import { Product } from './Product';
-import { products } from '../queries/productQuery';
 import PropTypes from 'prop-types';
 import { Box } from '@components';
+import {useProductList} from '../hooks/useProductList'
 
 export const ProductList = ({ channel, first }) => {
-	const {
-		data: {
-			products: { edges },
-		},
-		error,
-	} = useQuery(products, {
-		variables: {
-			first,
-			channel,
-		},
-	});
+
+	const {products, error} = useProductList({first: 20, channel: 'uk'});
 
 	if (error) return <>Error</>;
 
@@ -27,7 +18,7 @@ export const ProductList = ({ channel, first }) => {
 			gridAutoFlow='dense'
 			gridGap={8}
 		>
-			{edges.map((product) => (
+			{products.map((product) => (
 				<Product key={product.node.id} product={product.node} />
 			))}
 		</Box>

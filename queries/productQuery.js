@@ -1,7 +1,7 @@
 // TODO set up fragment for basic product info
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-import { REQURIED_PRODUCT_FIELDS } from './fragments';
+import { REQURIED_PRODUCT_FIELDS } from "./fragments";
 
 export const products = gql`
 	${REQURIED_PRODUCT_FIELDS}
