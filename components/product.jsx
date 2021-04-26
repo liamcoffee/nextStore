@@ -5,10 +5,7 @@ import { Box } from './Box';
 import { Text } from './Text';
 
 const ProductGridImg = styled.img`
-	height: 100%;
 	width: 100%;
-	object-fit: cover;
-
 	transition: transform 0.2s ease-in-out;
 `;
 
@@ -16,7 +13,8 @@ const ProductWrap = styled(Box)`
 	cursor: pointer;
 	text-align: center;
 	position: relative;
-
+	display: grid;
+	align-items: end;
 	&:hover ${ProductGridImg} {
 		transform: scale(1.1);
 	}
@@ -38,14 +36,13 @@ export const Product = ({ product }) => {
 						{product.name}
 					</Text>
 
-					{/* This is a little bit hacky but a sample product 
-					was returning a massive blob of lorem in position 3 */}
-
-					{product.collections.slice(0, 2).map((collectionName, i) => {
-						if (i > 3) return;
+					{product.collections.map((collectionName, i) => {
 						return (
 							<Text as='span' color='white' key={collectionName.name + i}>
-								{collectionName.name} /{' '}
+								{/* This is a little bit hacky but a sample product 
+								was returning a massive blob of lorem in position 3 */}
+								{collectionName.name.substring(0, 20)}
+								{i < product.collections.length - 1 && ' / '}
 							</Text>
 						);
 					})}

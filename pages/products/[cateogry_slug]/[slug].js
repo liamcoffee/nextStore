@@ -1,15 +1,18 @@
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { singleProduct } from "queries/productQuery";
+import { singleProduct } from 'queries/productQuery';
 
-import { initializeApollo } from "lib/apolloClient";
-import { useQuery } from "@apollo/client";
+import { initializeApollo } from 'lib/apolloClient';
+import { useQuery } from '@apollo/client';
 
-import { Button, Header, Box, Text } from "@components";
+import { Button, Box, Text } from '@components';
 
-import { CHANNEL } from "lib/consts";
-import { mapCurrencySymbol } from "helpers";
+import { CHANNEL } from 'lib/consts';
+import { mapCurrencySymbol } from 'helpers';
+import { ProductList } from '@components';
+import { products } from '@queries/productQuery';
+import Head from 'next/head';
 
 const generateDescriptionBlock = (description) => {
 	return JSON.parse(description).blocks.map((block, i) => (
@@ -35,6 +38,9 @@ ProductPage.propTypes = {
 
 // Used styled systems breakpoints with flex on this page just for variety
 
+// Page consts
+const relatedProductCount = 4;
+
 export default function ProductPage({ slug }) {
 	const {
 		data: { product },
@@ -53,11 +59,15 @@ export default function ProductPage({ slug }) {
 
 	return (
 		<>
-			<Header title={product.seoTitle} description={product.seoDescription} />
+			<Head>
+				<title>{product.seoTitle}</title>
+				<meta property='og:title' content={product.seoTitle} key='title' />
+				<meta name='description' content={product.seoDescription} />
+			</Head>
 			<Box
-				display={["block", "block", "flex"]}
-				justifyContent="center"
-				alignItems="center"
+				display={['block', 'block', 'flex']}
+				justifyContent='center'
+				alignItems='center'
 			>
 				<Box width={[1, 1, 1 / 2]}>
 					<LargeProductImage
@@ -66,7 +76,7 @@ export default function ProductPage({ slug }) {
 					/>
 				</Box>
 				<Box width={[1, 1, 1 / 2]}>
-					<Text as="h1" text="h1">
+					<Text as='h1' text='h1'>
 						{product.name}
 					</Text>
 
@@ -78,7 +88,7 @@ export default function ProductPage({ slug }) {
 						: product.pricing.priceRange.start.gross.amount}
 
 					<br />
-					{product.isAvailable ? "In stock" : "out of stock"}
+					{product.isAvailable ? 'In stock' : 'out of stock'}
 
 					<br />
 
@@ -86,9 +96,18 @@ export default function ProductPage({ slug }) {
 
 					{generateDescriptionBlock(product.description)}
 
-					<QtyBox type="number" />
+					<QtyBox type='number' defaultValue='1' />
 					<Button>Buy Now</Button>
 				</Box>
+			</Box>
+
+			<Box>
+				<h2>Related Products</h2>
+				<ProductList
+					first={relatedProductCount}
+					channel={CHANNEL}
+					filterArgs={{ categories: product.category.id }}
+				/>
 			</Box>
 		</>
 	);
@@ -98,11 +117,21 @@ export async function getServerSideProps({ query }) {
 	const { slug } = query;
 	const apolloClient = initializeApollo();
 
-	await apolloClient.query({
+	const getProduct = await apolloClient.query({
 		query: singleProduct,
 		variables: {
 			slug,
 			channel: CHANNEL,
+		},
+	});
+
+	console.log(`got the product`, getProduct);
+	await apolloClient.query({
+		query: products,
+		variables: {
+			first: relatedProductCount,
+			channel: CHANNEL,
+			filter: { categories: getProduct.data.product.category.id },
 		},
 	});
 

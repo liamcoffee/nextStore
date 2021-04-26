@@ -6,6 +6,7 @@ export const REQURIED_PRODUCT_FIELDS = gql`
 		name
 		slug
 		category {
+			id
 			slug
 		}
 

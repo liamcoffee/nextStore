@@ -1,27 +1,28 @@
-import { products } from "@queries/productQuery";
-import { ProductList, Header } from "@components";
-import { initializeApollo } from "@lib/apolloClient";
-import { CHANNEL } from "@lib/consts";
+import { products } from '@queries/productQuery';
+import { ProductList, Header } from '@components';
+import { initializeApollo } from '@lib/apolloClient';
+import { CHANNEL } from '@lib/consts';
+import Head from 'next/head';
 
 export default function Home() {
 	return (
 		<>
-			<Header title="soap shop" description="test" />
+			<Head>
+				<title>Shop</title>
+				<meta property='og:title' content='My page title' key='title' />
+			</Head>
 			<main>
 				<div>
-					<h1 role="heading" style={{ textAlign: "center" }}>
-						SHOP!!
-					</h1>
 					<ProductList first={20} channel={CHANNEL} />
 				</div>
 			</main>
 			<footer>
 				<a
-					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
+					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+					target='_blank'
+					rel='noopener noreferrer'
 				>
-					Powered by <img src="/vercel.svg" alt="Vercel Logo" />
+					Powered by <img src='/vercel.svg' alt='Vercel Logo' />
 				</a>
 			</footer>
 		</>

@@ -1,10 +1,11 @@
+import { useQuery } from '@apollo/client';
 import { Product } from './Product';
 import PropTypes from 'prop-types';
 import { Box } from '@components';
 import { useProductList } from '../hooks/useProductList';
 
-export const ProductList = ({ channel, first, filterArgs }) => {
-	const { products, error } = useProductList({ first, channel, filterArgs });
+export const ProductGrid = ({ channel, first }) => {
+	const { products, error } = useProductList({ first, channel });
 
 	if (error) return <>Error</>;
 
@@ -23,9 +24,7 @@ export const ProductList = ({ channel, first, filterArgs }) => {
 	);
 };
 
-ProductList.propTypes = {
+ProductGrid.propTypes = {
 	channel: PropTypes.string.isRequired,
 	first: PropTypes.number.isRequired,
-	// Not really correct but fine for demo purposes
-	filterArgs: PropTypes.object,
 };
