@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -32,6 +33,34 @@ const QtyBox = styled.input`
 	padding: 1.25rem 2.5rem;
 `;
 
+const FadeBottom = styled.div`
+	width: 100%;
+	height: 30px;
+	z-index: 99;
+	position: absolute;
+	bottom: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	background-color: white;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	&:hover {
+		background-color: black;
+		color: white;
+	}
+`;
+
+const ProductDescription = styled.div`
+	transition: max-height 0.15s ease-out;
+	max-height: ${(props) => (props.showingMore ? '1000px' : '300px')};
+	overflow: hidden;
+	position: relative;
+	padding-bottom: ${(props) => props.theme.space[8]};
+`;
+
 ProductPage.propTypes = {
 	slug: PropTypes.string.isRequired,
 };
@@ -42,6 +71,7 @@ ProductPage.propTypes = {
 const relatedProductCount = 4;
 
 export default function ProductPage({ slug }) {
+	const [showingMore, setShowingMore] = useState(false);
 	const {
 		data: { product },
 		error,
@@ -86,14 +116,18 @@ export default function ProductPage({ slug }) {
 					<br />
 					{product.isAvailable ? 'In stock' : 'out of stock'}
 
-					<br />
-
 					<hr />
+					<ProductDescription showingMore={showingMore}>
+						{generateDescriptionBlock(product.description)}
+						<FadeBottom onClick={() => setShowingMore(!showingMore)}>
+							{showingMore ? 'Show Less' : 'Show More'}
+						</FadeBottom>
+					</ProductDescription>
 
-					{generateDescriptionBlock(product.description)}
-
-					<QtyBox type='number' defaultValue='1' />
-					<Button>Buy Now</Button>
+					<Box mt={8}>
+						<QtyBox type='number' defaultValue='1' />
+						<Button>Buy Now</Button>
+					</Box>
 				</Box>
 			</Box>
 
