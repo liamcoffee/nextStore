@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
 	fontWeight,
 	space,
@@ -6,8 +6,9 @@ import {
 	variant,
 	color,
 	shadow,
-} from "styled-system";
-const textVariant = variant({ key: "text", prop: "text" });
+	layout,
+} from 'styled-system';
+const textVariant = variant({ key: 'text', prop: 'text' });
 /** Generic Text component bound to `text` prop in theme. */
 export const Text = styled.p`
 	margin-top: 0;
@@ -18,4 +19,5 @@ export const Text = styled.p`
     ${typography}
     ${color}
 	${shadow}
+	${layout}
 `;

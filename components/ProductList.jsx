@@ -12,7 +12,8 @@ export const ProductList = ({ channel, first, filterArgs }) => {
 			...(filterArgs && { filter: filterArgs }),
 		},
 	});
-
+	console.log(`logging data here`, data);
+	console.log(`error`, error);
 	if (loading) return null;
 	if (error) return <>Error</>;
 

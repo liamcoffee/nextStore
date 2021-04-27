@@ -6,7 +6,11 @@ import { Text } from './Text';
 
 const ProductGridImg = styled.img`
 	width: 100%;
-	transition: transform 0.2s ease-in-out;
+`;
+
+const ProductText = styled(Text)`
+	color: ${(props) => props.theme.colors.black};
+	transition: all 0.2s ease-in-out;
 `;
 
 const ProductWrap = styled(Box)`
@@ -15,8 +19,9 @@ const ProductWrap = styled(Box)`
 	position: relative;
 	display: grid;
 	align-items: end;
-	&:hover ${ProductGridImg} {
-		transform: scale(1.1);
+
+	&:hover ${Text} {
+		color: ${(props) => props.theme.colors.peach};
 	}
 `;
 
@@ -26,26 +31,29 @@ export const Product = ({ product }) => {
 	return (
 		<Link href={`/products/${product.category.slug}/${product.slug}`}>
 			<ProductWrap>
-				<ProductGridImg
-					src={product.thumbnail.url}
-					alt={product.thumbnail.alt}
-				/>
+				{product?.thumbnail?.url && (
+					<ProductGridImg
+						src={product.thumbnail.url}
+						alt={product.thumbnail.alt}
+					/>
+				)}
 
-				<Box backgroundColor='black' p={3}>
-					<Text text='h3' as='h3' color='white'>
+				<Box p={3} borderTop='1px solid'>
+					<ProductText text='h2' as='span' fontWeight='bold' display='block'>
 						{product.name}
-					</Text>
+					</ProductText>
 
 					{product.collections.map((collectionName, i) => {
 						return (
-							<Text as='span' color='white' key={collectionName.name + i}>
+							<ProductText as='span' key={collectionName.name + i}>
 								{/* This is a little bit hacky but a sample product 
 								was returning a massive blob of lorem in position 3 */}
 								{collectionName.name.substring(0, 20)}
 								{i < product.collections.length - 1 && ' / '}
-							</Text>
+							</ProductText>
 						);
 					})}
+					<hr width='80%' />
 				</Box>
 			</ProductWrap>
 		</Link>

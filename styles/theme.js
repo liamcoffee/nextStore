@@ -40,6 +40,7 @@ export const theme = {
 	colors: {
 		black: '#000000',
 		white: '#ffffff',
+		peach: '#f0bfb6',
 	},
 	fontSizes,
 	fontWeights,

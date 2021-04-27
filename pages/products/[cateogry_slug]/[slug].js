@@ -64,11 +64,7 @@ export default function ProductPage({ slug }) {
 				<meta property='og:title' content={product.seoTitle} key='title' />
 				<meta name='description' content={product.seoDescription} />
 			</Head>
-			<Box
-				display={['block', 'block', 'flex']}
-				justifyContent='center'
-				alignItems='center'
-			>
+			<Box display={['block', 'block', 'flex']} justifyContent='center' my={8}>
 				<Box width={[1, 1, 1 / 2]}>
 					<LargeProductImage
 						src={product.thumbnail.url}
@@ -101,14 +97,15 @@ export default function ProductPage({ slug }) {
 				</Box>
 			</Box>
 
-			<Box>
+			<Box textAlign='center' borderTop='1px solid' borderBottom='1px solid'>
 				<h2>Related Products</h2>
-				<ProductList
-					first={relatedProductCount}
-					channel={CHANNEL}
-					filterArgs={{ categories: product.category.id }}
-				/>
 			</Box>
+
+			<ProductList
+				first={relatedProductCount}
+				channel={CHANNEL}
+				filterArgs={{ categories: product.category.id }}
+			/>
 		</>
 	);
 }

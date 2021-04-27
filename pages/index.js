@@ -1,19 +1,34 @@
-import { products, homePage } from "@queries/productQuery";
-import { HOME_PAGE } from "@queries/home";
-import { ProductList, Header } from "@components";
-import { initializeApollo } from "@lib/apolloClient";
-import { CHANNEL } from "@lib/consts";
-import Head from "next/head";
-import { useQuery } from "@apollo/client";
-import { Box, Text } from "@components";
+import { HOME_PAGE } from '@queries/home';
+import { ProductList, Header } from '@components';
+import { initializeApollo } from '@lib/apolloClient';
+import { CHANNEL } from '@lib/consts';
+import Head from 'next/head';
+import { useQuery } from '@apollo/client';
+import { Box, Text, ProductFilter } from '@components';
+import { useState } from 'react';
 export default function Home() {
+	const [filter, setFilter] = useState();
+	const [viewAmount, setViewAmount] = useState(20);
+
 	const { data, error, loading } = useQuery(HOME_PAGE, {
 		variables: {
-			first: 20,
+			first: 5,
 			channel: CHANNEL,
-			catId: "Q2F0ZWdvcnk6Nw==",
+			catId: 'Q2F0ZWdvcnk6Nw==',
+			filter: { categories: 'Q2F0ZWdvcnk6Mg==' },
 		},
 	});
+
+	const handleCatChange = (e) => {
+		if (e.target.value === `__all__`) {
+			return setFilter();
+		}
+		setFilter({ categories: e.target.value });
+	};
+
+	const handleViewAmountChange = (e) => {
+		setViewAmount(e.target.value);
+	};
 
 	console.log(`loggin`, data);
 
@@ -24,63 +39,68 @@ export default function Home() {
 		<>
 			<Head>
 				<title>Shop</title>
-				<meta property="og:title" content="My page title" key="title" />
-				<meta name="description" content={"TODO"} />
+				<meta property='og:title' content='My page title' key='title' />
+				<meta name='description' content={shop.description} />
 			</Head>
 
 			{/* This would be a hero component in larger app */}
 			{category.backgroundImage.url && (
 				<Box
 					backgroundImage={`url('${category.backgroundImage.url}')`}
-					backgroundSize="cover"
-					minHeight="320px"
-					display="flex"
-					alignItems="center"
-					justifyContent="center"
-					p="8"
+					backgroundSize='cover'
+					minHeight='320px'
+					display='flex'
+					alignItems='center'
+					justifyContent='center'
+					p='8'
 				>
 					{shop.name && (
-						<Text text="h1" as="h1" color="white" textShadow="1px 1px #000">
-							{shop.name}
+						<Text text='h1' as='h1' color='white' textShadow='1px 1px #000'>
+							{shop.headerText}
 						</Text>
 					)}
 				</Box>
 			)}
 
 			<main>
+				<ProductFilter
+					viewAmount={viewAmount}
+					fitler={filter}
+					onCatChange={handleCatChange}
+					onViewAmountChange={handleViewAmountChange}
+				/>
+				<br />
+				<br />
+				<br />
 				<div>
-					<ProductList first={20} channel={CHANNEL} />
+					<ProductList
+						first={viewAmount}
+						channel={CHANNEL}
+						filterArgs={filter}
+					/>
 				</div>
 			</main>
-			<footer>
-				<a
-					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Powered by <img src="/vercel.svg" alt="Vercel Logo" />
-				</a>
-			</footer>
 		</>
 	);
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
 	// Run queries for page, and store in clients cache
 	// Could skip cache and return data as prop
 
+	console.log(`LOGGIN`, context.props);
 	const apolloClient = initializeApollo();
 
-	const test = await apolloClient.query({
+	await apolloClient.query({
 		query: HOME_PAGE,
 		variables: {
 			first: 20,
 			channel: CHANNEL,
-			catId: "Q2F0ZWdvcnk6Nw==",
+
+			// getting some info from a category to populate hero
+			catId: 'Q2F0ZWdvcnk6Nw==',
 		},
 	});
-
-	console.log(`LOGGIN`, test);
 
 	return {
 		props: {
