@@ -1,17 +1,17 @@
-import { products, homePage } from '@queries/productQuery';
-import { HOME_PAGE } from '@queries/home';
-import { ProductList, Header } from '@components';
-import { initializeApollo } from '@lib/apolloClient';
-import { CHANNEL } from '@lib/consts';
-import Head from 'next/head';
-import { useQuery } from '@apollo/client';
-import { Box, Text } from '@components';
+import { products, homePage } from "@queries/productQuery";
+import { HOME_PAGE } from "@queries/home";
+import { ProductList, Header } from "@components";
+import { initializeApollo } from "@lib/apolloClient";
+import { CHANNEL } from "@lib/consts";
+import Head from "next/head";
+import { useQuery } from "@apollo/client";
+import { Box, Text } from "@components";
 export default function Home() {
 	const { data, error, loading } = useQuery(HOME_PAGE, {
 		variables: {
 			first: 20,
 			channel: CHANNEL,
-			catId: 'Q2F0ZWdvcnk6Nw==',
+			catId: "Q2F0ZWdvcnk6Nw==",
 		},
 	});
 
@@ -24,15 +24,23 @@ export default function Home() {
 		<>
 			<Head>
 				<title>Shop</title>
-				<meta property='og:title' content='My page title' key='title' />
-				<meta name='description' content={'TODO'} />
+				<meta property="og:title" content="My page title" key="title" />
+				<meta name="description" content={"TODO"} />
 			</Head>
 
 			{/* This would be a hero component in larger app */}
 			{category.backgroundImage.url && (
-				<Box>
+				<Box
+					backgroundImage={`url('${category.backgroundImage.url}')`}
+					backgroundSize="cover"
+					minHeight="320px"
+					display="flex"
+					alignItems="center"
+					justifyContent="center"
+					p="8"
+				>
 					{shop.name && (
-						<Text text='h1' as='h1' color='black'>
+						<Text text="h1" as="h1" color="white" textShadow="1px 1px #000">
 							{shop.name}
 						</Text>
 					)}
@@ -46,11 +54,11 @@ export default function Home() {
 			</main>
 			<footer>
 				<a
-					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-					target='_blank'
-					rel='noopener noreferrer'
+					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+					target="_blank"
+					rel="noopener noreferrer"
 				>
-					Powered by <img src='/vercel.svg' alt='Vercel Logo' />
+					Powered by <img src="/vercel.svg" alt="Vercel Logo" />
 				</a>
 			</footer>
 		</>
@@ -68,7 +76,7 @@ export async function getServerSideProps() {
 		variables: {
 			first: 20,
 			channel: CHANNEL,
-			catId: 'Q2F0ZWdvcnk6Nw==',
+			catId: "Q2F0ZWdvcnk6Nw==",
 		},
 	});
 

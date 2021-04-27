@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
-
+import Image from 'next/image'
 const NavBarWrapper = styled.nav`
 	width: 100%;
 	border: 1px solid ${(props) => props.theme.colors.white};
 	background-color: black;
 	text-align: left;
+	padding: ${(props) => props.theme.space[3]};
+	display: flex;
+	align-items: center;
 `;
 
 const NavList = styled.ul`
@@ -19,8 +22,6 @@ const NavItem = styled.li`
 	list-style: none;
 	display: inline-block;
 	color: ${(props) => props.theme.colors.white};
-	border: 1px solid ${(props) => props.theme.colors.black};
-	border-right: 1px solid ${(props) => props.theme.colors.white};
 	padding: ${(props) => props.theme.space[3]};
 	cursor: pointer;
 	transition: all 0.2s ease;
@@ -36,6 +37,10 @@ export const NavBar = () => {
 
 	return (
 		<NavBarWrapper>
+			<Link href={`/`}>
+				<Image src="/../public/logo.svg" height={80} width={230} />
+			</Link>
+			
 			<NavList>
 				<Link href={`/`}>
 					<NavItem isActive={router.pathname === '/'}>Home</NavItem>
