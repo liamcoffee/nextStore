@@ -5,7 +5,7 @@ import { NavBar } from './NavBar';
 export const Header = () => {
 	return (
 		<Box>
-			<Text textAlign='center' fontSize={'15rem'}>
+			<Text textAlign='center' fontSize={'15rem'} role='heading'>
 				SUDDDS
 			</Text>
 			<NavBar />

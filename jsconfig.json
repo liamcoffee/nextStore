@@ -5,8 +5,9 @@
 		"paths": {
 			"@components*": ["components/"],
 			"@pages/*": ["pages/*"],
-			"@queries/*": ["queries/*"],
-			"@lib/*": ["lib/*"]
+			"@queries*": ["queries/"],
+			"@lib/*": ["lib/*"],
+			"@hooks/*": ["hooks/*"]
 		}
 	}
 }

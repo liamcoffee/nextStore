@@ -1,16 +1,44 @@
-import { products } from '@queries/productQuery';
+import { products, homePage } from '@queries/productQuery';
+import { HOME_PAGE } from '@queries/home';
 import { ProductList, Header } from '@components';
 import { initializeApollo } from '@lib/apolloClient';
 import { CHANNEL } from '@lib/consts';
 import Head from 'next/head';
-
+import { useQuery } from '@apollo/client';
+import { Box, Text } from '@components';
 export default function Home() {
+	const { data, error, loading } = useQuery(HOME_PAGE, {
+		variables: {
+			first: 20,
+			channel: CHANNEL,
+			catId: 'Q2F0ZWdvcnk6Nw==',
+		},
+	});
+
+	console.log(`loggin`, data);
+
+	if (loading) return null;
+	if (error) return <>Error</>;
+	const { category, shop } = data;
 	return (
 		<>
 			<Head>
 				<title>Shop</title>
 				<meta property='og:title' content='My page title' key='title' />
+				<meta name='description' content={'TODO'} />
 			</Head>
+
+			{/* This would be a hero component in larger app */}
+			{category.backgroundImage.url && (
+				<Box>
+					{shop.name && (
+						<Text text='h1' as='h1' color='black'>
+							{shop.name}
+						</Text>
+					)}
+				</Box>
+			)}
+
 			<main>
 				<div>
 					<ProductList first={20} channel={CHANNEL} />
@@ -35,15 +63,16 @@ export async function getServerSideProps() {
 
 	const apolloClient = initializeApollo();
 
-	console.log(`got the vlient`, apolloClient);
-
-	await apolloClient.query({
-		query: products,
+	const test = await apolloClient.query({
+		query: HOME_PAGE,
 		variables: {
 			first: 20,
 			channel: CHANNEL,
+			catId: 'Q2F0ZWdvcnk6Nw==',
 		},
 	});
+
+	console.log(`LOGGIN`, test);
 
 	return {
 		props: {

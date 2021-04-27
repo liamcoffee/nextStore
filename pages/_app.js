@@ -1,10 +1,10 @@
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "../lib/apolloClient";
-import { theme } from "../styles/theme";
-import { ThemeProvider } from "styled-components";
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../lib/apolloClient';
+import { theme } from '../styles/theme';
+import { ThemeProvider } from 'styled-components';
 
-import { createGlobalStyle } from "styled-components";
-import { Layout } from "@components";
+import { createGlobalStyle } from 'styled-components';
+import { Layout } from '@components';
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -21,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App({ Component, pageProps }) {
 	const apolloClient = useApollo(pageProps.initialApolloState);
-
 	return (
 		<>
 			<GlobalStyle />

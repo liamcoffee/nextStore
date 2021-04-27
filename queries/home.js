@@ -5,7 +5,7 @@ import { REQURIED_PRODUCT_FIELDS } from './fragments';
 export const HOME_PAGE = gql`
 	${REQURIED_PRODUCT_FIELDS}
 
-	query homePage($first: Int!, $channel: String!) {
+	query homePage($first: Int!, $channel: String!, $catId: ID!) {
 		shop {
 			name
 		}
@@ -14,11 +14,17 @@ export const HOME_PAGE = gql`
 			edges {
 				node {
 					...CoreProductFields
-					thumbnail(size: 5) {
+					thumbnail(size: 500) {
 						url
 						alt
 					}
 				}
+			}
+		}
+
+		category(id: $catId) {
+			backgroundImage {
+				url
 			}
 		}
 	}

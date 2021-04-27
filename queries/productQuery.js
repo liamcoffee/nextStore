@@ -40,3 +40,23 @@ export const singleProduct = gql`
 		}
 	}
 `;
+
+// export const homePage = gql`
+// query homepage($first: Int!, $channel: String!, $filter: ProductFilterInput, $catId: ID!) {
+// 	category(id: $catid){
+// 		backgroundImage{
+// 		url
+// 		}
+// 	}
+// 	products(first: $first, channel: $channel, filter: $filter) {
+// 		edges {
+// 			node {
+// 				...CoreProductFields
+// 				thumbnail(size: 500) {
+// 					url
+// 					alt
+// 				}
+// 			}
+// 		}
+// 	}
+// `;

@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-import { Box } from './Box';
-import { Text } from './Text';
-
-import styled from 'styled-components';
+import Link from 'next/link';
+import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
 
 const NavBarWrapper = styled.nav`
 	width: 100%;
@@ -17,6 +15,7 @@ const NavList = styled.ul`
 `;
 
 const NavItem = styled.li`
+	text-decoration: ${(props) => (props.isActive ? 'underline' : 'none')};
 	list-style: none;
 	display: inline-block;
 	color: ${(props) => props.theme.colors.white};
@@ -25,6 +24,7 @@ const NavItem = styled.li`
 	padding: ${(props) => props.theme.space[3]};
 	cursor: pointer;
 	transition: all 0.2s ease;
+
 	&:hover {
 		color: ${(props) => props.theme.colors.black};
 		background-color: ${(props) => props.theme.colors.white};
@@ -32,12 +32,17 @@ const NavItem = styled.li`
 `;
 
 export const NavBar = () => {
+	const router = useRouter();
+
 	return (
 		<NavBarWrapper>
 			<NavList>
-				<NavItem>lorem</NavItem>
-				<NavItem>lorem</NavItem>
-				<NavItem>lorem</NavItem>
+				<Link href={`/`}>
+					<NavItem isActive={router.pathname === '/'}>Home</NavItem>
+				</Link>
+				{/* Dead links just for show */}
+				<NavItem>Soaps</NavItem>
+				<NavItem>Bath bombs</NavItem>
 			</NavList>
 		</NavBarWrapper>
 	);
