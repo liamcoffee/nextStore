@@ -1,25 +1,25 @@
-import { HOME_PAGE } from '@queries/home';
+import { HOME_PAGE } from '@queries';
 import { initializeApollo } from '@lib/apolloClient';
 import { CHANNEL } from '@lib/consts';
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
 import { Box, Text, ProductFilter, ProductList } from '@components';
 import { useState } from 'react';
+
+// getting some info from a random category to populate hero
+const catId = 'Q2F0ZWdvcnk6Nw==';
+
 export default function Home() {
 	const [filter, setFilter] = useState();
 	const [viewAmount, setViewAmount] = useState(20);
 
 	const { data, error, loading } = useQuery(HOME_PAGE, {
 		variables: {
-			first: 5,
+			first: 20,
 			channel: CHANNEL,
-			catId: 'Q2F0ZWdvcnk6Nw==',
-			filter: { categories: 'Q2F0ZWdvcnk6Mg==' },
+			catId,
 		},
 	});
-
-	console.log(`loggin`, data);
-	console.log(error, loading);
 
 	const handleCatChange = (e) => {
 		if (e.target.value === `__all__`) {
@@ -32,15 +32,12 @@ export default function Home() {
 		setViewAmount(e.target.value);
 	};
 
-	console.log(`loggin`, data);
-
-	console.log(`error`, error);
-
 	if (loading) return null;
+
+	// should be 404 page
 	if (error) return <>Error</>;
 	const { category, shop } = data;
 
-	console.log(data);
 	return (
 		<>
 			<Head>
@@ -88,11 +85,10 @@ export default function Home() {
 	);
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
 	// Run queries for page, and store in clients cache
 	// Could skip cache and return data as prop
 
-	console.log(`LOGGIN`, context.props);
 	const apolloClient = initializeApollo();
 
 	await apolloClient.query({
@@ -100,9 +96,7 @@ export async function getServerSideProps(context) {
 		variables: {
 			first: 20,
 			channel: CHANNEL,
-
-			// getting some info from a category to populate hero
-			catId: 'Q2F0ZWdvcnk6Nw==',
+			catId,
 		},
 	});
 

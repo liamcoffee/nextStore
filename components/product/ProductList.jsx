@@ -2,27 +2,21 @@ import { Product } from './Product';
 import PropTypes from 'prop-types';
 import { Box } from '@components';
 import { useQuery } from '@apollo/client';
-import { products } from '@queries';
+import { PRODUCTS } from '@queries';
 export const ProductList = ({ channel, first, filterArgs }) => {
-	const test = {
-		variables: {
-			first,
-			channel,
-			...(filterArgs && { filter: filterArgs }),
-		},
-	};
-
-	console.log(`test`, test);
-	const { data, error, loading } = useQuery(products, {
+	/* In a larger projec this would be moved to a custom hook
+	incase you wanted another similar component such as productGrid
+	*/
+	const { data, error, loading } = useQuery(PRODUCTS, {
 		variables: {
 			first,
 			channel,
 			...(filterArgs && { filter: filterArgs }),
 		},
 	});
-	console.log(`logging data here`, data);
-	console.log(`error`, error);
+
 	if (loading) return null;
+	// should be 404
 	if (error) return <>Error</>;
 
 	return (
@@ -32,6 +26,7 @@ export const ProductList = ({ channel, first, filterArgs }) => {
 			gridTemplateRows='repeat(auto-fill, minmax(180px,1fr))'
 			gridAutoFlow='dense'
 			gridGap={8}
+			role='list'
 		>
 			{data.products.edges.map((product) => (
 				<Product key={product.node.id} product={product.node} />

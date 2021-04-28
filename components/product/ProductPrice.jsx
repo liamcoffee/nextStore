@@ -27,4 +27,6 @@ export const ProductPrice = ({ product, ...textProps }) => {
 	);
 };
 
-ProductPrice.propTypes = productType.pricing;
+ProductPrice.propTypes = {
+	product: productType,
+};

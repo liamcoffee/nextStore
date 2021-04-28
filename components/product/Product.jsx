@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Box } from '../Box';
+import PropTypes from 'prop-types';
 
 import { ProductPrice } from './ProductPrice';
 import { productType } from './productType';
@@ -46,5 +47,6 @@ export const Product = ({ product }) => {
 		</Link>
 	);
 };
-
-Product.propTypes = productType;
+Product.propTypes = {
+	product: productType,
+};

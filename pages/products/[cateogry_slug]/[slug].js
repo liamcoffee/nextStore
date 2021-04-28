@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { singleProduct } from 'queries/productQuery';
-
 import { initializeApollo } from 'lib/apolloClient';
 import { useQuery } from '@apollo/client';
 
@@ -10,7 +8,7 @@ import { Button, Box, Text } from '@components';
 
 import { CHANNEL } from 'lib/consts';
 import { ProductList } from '@components';
-import { products } from '@queries/productQuery';
+import { PRODUCTS, SINGLE_PRODUCT } from '@queries';
 import Head from 'next/head';
 import { ProductPrice } from 'components/product/ProductPrice';
 
@@ -37,14 +35,17 @@ Imported some styled components as i find having too many props distracting
 const relatedProductCount = 4;
 
 export default function ProductPage({ slug }) {
-	// state to control size of description box
-	// it appears to be huge on a lot of products, interested to see how you control / use this
+	/* state to control size of description box,
+	it appears to be huge on a lot of products, 
+	interested to see how you control / use this
+	the showmore is a little flawed in that it doesnt take into account the height of the content
+	*/
 	const [showingMore, setShowingMore] = useState(false);
 
 	const {
 		data: { product },
 		error,
-	} = useQuery(singleProduct, {
+	} = useQuery(SINGLE_PRODUCT, {
 		variables: {
 			slug,
 			channel: CHANNEL,
@@ -122,6 +123,7 @@ export default function ProductPage({ slug }) {
 			</Box>
 
 			<ProductList
+				role='feed'
 				first={relatedProductCount}
 				channel={CHANNEL}
 				filterArgs={{ categories: product.category.id }}
@@ -139,7 +141,7 @@ export async function getServerSideProps({ query }) {
 	const apolloClient = initializeApollo();
 
 	const getProduct = await apolloClient.query({
-		query: singleProduct,
+		query: SINGLE_PRODUCT,
 		variables: {
 			slug,
 			channel: CHANNEL,
@@ -147,7 +149,7 @@ export async function getServerSideProps({ query }) {
 	});
 
 	await apolloClient.query({
-		query: products,
+		query: PRODUCTS,
 		variables: {
 			first: relatedProductCount,
 			channel: CHANNEL,

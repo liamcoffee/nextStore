@@ -52,7 +52,9 @@ export const NavBar = () => {
 				px={6}
 			>
 				<Link href={`/`}>
-					<Image src='/../public/logo.svg' height={80} width={230} />
+					<a>
+						<Image src='/../public/logo.svg' height={80} width={230} />
+					</a>
 				</Link>
 
 				<Box

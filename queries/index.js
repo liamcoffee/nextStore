@@ -1,2 +1,1 @@
-export * from './productQuery';
-export * from './home';
+export * from './queries';

@@ -40,6 +40,7 @@ export const ShowMore = styled.div`
 		background-color: black;
 		color: white;
 	}
+	user-select: none;
 `;
 
 export const ProductDescription = styled.div`
