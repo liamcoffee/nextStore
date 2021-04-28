@@ -5,7 +5,7 @@ import { Button } from '../Button';
 const buttonText = 'button';
 expect.extend(toHaveNoViolations);
 
-// Basic rendering test, could add a snapshot if thats your bag
+// Basic rendering test
 // installed jest-axe to give some confidence with accessibility
 
 describe('Button', () => {
