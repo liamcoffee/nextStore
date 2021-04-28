@@ -1,29 +1,15 @@
 import Link from 'next/link';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Box } from '../Box';
-import { Text } from '../Text';
 
-const ProductGridImg = styled.img`
-	width: 100%;
-`;
+import { ProductPrice } from './ProductPrice';
+import { productType } from './productType';
 
-const ProductText = styled(Text)`
-	color: ${(props) => props.theme.colors.black};
-	transition: all 0.2s ease-in-out;
-`;
-
-const ProductWrap = styled(Box)`
-	cursor: pointer;
-	text-align: center;
-	position: relative;
-	display: grid;
-	align-items: end;
-
-	&:hover ${Text} {
-		color: ${(props) => props.theme.colors.peach};
-	}
-`;
+import {
+	ProductText,
+	ProductWrap,
+	ProductGridImg,
+	ProductHr,
+} from './Product.styled';
 
 export const Product = ({ product }) => {
 	if (!product) return null;
@@ -37,7 +23,8 @@ export const Product = ({ product }) => {
 					/>
 				)}
 
-				<Box p={3} borderTop='1px solid'>
+				<Box p={3}>
+					<ProductHr />
 					<ProductText text='h2' as='span' fontWeight='bold' display='block'>
 						{product.name}
 					</ProductText>
@@ -52,45 +39,12 @@ export const Product = ({ product }) => {
 							</ProductText>
 						);
 					})}
-					<Text>
-						{product.pricing.priceRange?.start.gross.currency}
-						{product.pricing.priceRange?.start.gross.amount}
-
-					</Text>
-					<hr width='80%' />
+					<ProductPrice mt={2} text='h2' product={product} />
+					<ProductHr />
 				</Box>
 			</ProductWrap>
 		</Link>
 	);
 };
 
-
-Product.propTypes = {
-	product: PropTypes.shape({
-		id: PropTypes.string.isRequired,
-		category: PropTypes.shape({
-			slug: PropTypes.string.isRequired,
-		}),
-		name: PropTypes.string.isRequired,
-		slug: PropTypes.string.isRequired,
-		thumbnail: PropTypes.shape({
-			url: PropTypes.string.isRequired,
-			alt: PropTypes.string.isRequired,
-		}).isRequired,
-		collections: PropTypes.arrayOf(
-			PropTypes.shape({
-				name: PropTypes.string.isRequired,
-			})
-		).isRequired,
-		pricing: PropTypes.shape({
-			priceRange: PropTypes.shape({
-				start:  PropTypes.shape({
-					gross: PropTypes.shape({
-						amount: PropTypes.number,
-						currency: PropTypes.string,
-					}),
-				}),
-			}),
-		}).isRequired,
-	}),
-};
+Product.propTypes = productType;

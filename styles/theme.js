@@ -41,6 +41,7 @@ export const theme = {
 		black: '#000000',
 		white: '#ffffff',
 		peach: '#f0bfb6',
+		jet: '#343434',
 	},
 	fontSizes,
 	fontWeights,

@@ -4,6 +4,15 @@ import { Box } from '@components';
 import { useQuery } from '@apollo/client';
 import { products } from '@queries';
 export const ProductList = ({ channel, first, filterArgs }) => {
+	const test = {
+		variables: {
+			first,
+			channel,
+			...(filterArgs && { filter: filterArgs }),
+		},
+	};
+
+	console.log(`test`, test);
 	const { data, error, loading } = useQuery(products, {
 		variables: {
 			first,
@@ -19,7 +28,7 @@ export const ProductList = ({ channel, first, filterArgs }) => {
 	return (
 		<Box
 			display='grid'
-			gridTemplateColumns='repeat(auto-fill, minmax(300px, 1fr))'
+			gridTemplateColumns='repeat(auto-fill, minmax(285px, 1fr))'
 			gridTemplateRows='repeat(auto-fill, minmax(180px,1fr))'
 			gridAutoFlow='dense'
 			gridGap={8}

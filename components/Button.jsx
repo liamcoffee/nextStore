@@ -2,27 +2,22 @@ import styled from 'styled-components';
 import { space } from 'styled-system';
 
 export const Button = styled.button`
-	${(props) => props.theme.text.lead};
+	${(props) => props.theme.text.h3};
 
 	position: relative;
 	display: inline-block;
-	background: black;
-	color: #fff;
-	border: none;
-	border-radius: 0;
+	background-color: ${(props) => props.theme.colors.jet};
+	color: ${(props) => props.theme.colors.white};
 	padding: 1.25rem 2.5rem;
-
 	text-transform: uppercase;
 	cursor: pointer;
-	transform: translateZ(0);
-	transition: color 0.3s ease;
-	letter-spacing: 0.0625rem;
-	border: 1px solid white;
+	transition: background-color 0.3s ease;
+	border: 1px solid ${(props) => props.theme.colors.jet};
 
 	&:hover {
-		background-color: white;
-		color: black;
-		border: 1px solid black;
+		background-color: ${(props) => props.theme.colors.black};
+
+		border: 1px solid ${(props) => props.theme.colors.jet};
 	}
 
 	${space};
