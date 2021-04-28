@@ -2,7 +2,7 @@
 import { render, waitFor, screen } from '../../test-utils';
 // import { MockedProvider } from '@apollo/client/testing';
 import { apolloMockProducts } from '../../__fixtures__/products';
-import { ProductList } from '../ProductList';
+import { ProductList } from '../product/ProductList';
 
 describe('Home', () => {
 	it('renders without crashing', async () => {

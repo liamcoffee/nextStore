@@ -1,7 +1,6 @@
 import { Product } from './Product';
 import PropTypes from 'prop-types';
 import { Box } from '@components';
-// import { useProductList } from '../hooks/useProductList';
 import { useQuery } from '@apollo/client';
 import { products } from '@queries';
 export const ProductList = ({ channel, first, filterArgs }) => {

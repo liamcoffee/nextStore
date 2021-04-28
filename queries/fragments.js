@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const REQURIED_PRODUCT_FIELDS = gql`
 	fragment CoreProductFields on Product {

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box } from './Box';
-import { Text } from './Text';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 const ProductGridImg = styled.img`
 	width: 100%;
@@ -27,7 +27,6 @@ const ProductWrap = styled(Box)`
 
 export const Product = ({ product }) => {
 	if (!product) return null;
-
 	return (
 		<Link href={`/products/${product.category.slug}/${product.slug}`}>
 			<ProductWrap>
@@ -53,12 +52,18 @@ export const Product = ({ product }) => {
 							</ProductText>
 						);
 					})}
+					<Text>
+						{product.pricing.priceRange?.start.gross.currency}
+						{product.pricing.priceRange?.start.gross.amount}
+
+					</Text>
 					<hr width='80%' />
 				</Box>
 			</ProductWrap>
 		</Link>
 	);
 };
+
 
 Product.propTypes = {
 	product: PropTypes.shape({
@@ -77,5 +82,15 @@ Product.propTypes = {
 				name: PropTypes.string.isRequired,
 			})
 		).isRequired,
+		pricing: PropTypes.shape({
+			priceRange: PropTypes.shape({
+				start:  PropTypes.shape({
+					gross: PropTypes.shape({
+						amount: PropTypes.number,
+						currency: PropTypes.string,
+					}),
+				}),
+			}),
+		}).isRequired,
 	}),
 };
