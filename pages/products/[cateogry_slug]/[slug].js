@@ -36,8 +36,8 @@ const relatedProductCount = 4;
 
 export default function ProductPage({ slug }) {
 	/* state to control size of description box,
-	it appears to be huge on a lot of products, 
-	interested to see how you control / use this
+	description appears to be huge on a lot of products, 
+	interested to see how you control / use this (if you do at all)
 	the showmore is a little flawed in that it doesnt take into account the height of the content
 	*/
 	const [showingMore, setShowingMore] = useState(false);
