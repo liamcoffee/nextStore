@@ -58,7 +58,7 @@ export default function ProductPage({ slug }) {
 	}
 
 	return (
-		<>
+		<Box role='document'>
 			<Head>
 				<title>{product.seoTitle}</title>
 				<meta property='og:title' content={product.seoTitle} key='title' />
@@ -68,6 +68,7 @@ export default function ProductPage({ slug }) {
 				display={['block', 'block', 'flex']}
 				justifyContent='space-around'
 				my={8}
+				role='main'
 			>
 				<Box width={[1, 1, '40%']} position='relative'>
 					<LargeProductImage
@@ -92,7 +93,6 @@ export default function ProductPage({ slug }) {
 							{product.name}
 						</Text>
 
-						{/* TODO IF DISCOUNT, STAR RATING, TQY */}
 						<ProductPrice text='h1' product={product} />
 					</Box>
 
@@ -106,7 +106,10 @@ export default function ProductPage({ slug }) {
 					</ProductDescription>
 
 					<Box mt={8}>
-						<QtyBox type='number' defaultValue='1' />
+						<Text text='h2' as='label' for='qty' mr={4}>
+							Qty:
+						</Text>
+						<QtyBox name='qty' id='qty' type='number' defaultValue='1' />
 						<Button
 							onClick={() => {
 								alert('Hire me to see a mutation');
@@ -118,17 +121,22 @@ export default function ProductPage({ slug }) {
 				</Box>
 			</Box>
 
-			<Box textAlign='center' borderTop='1px solid' borderBottom='1px solid'>
+			<Box
+				textAlign='center'
+				borderTop='1px solid'
+				borderBottom='1px solid'
+				role='heading'
+				aria-level='1'
+			>
 				<h2>Related Products</h2>
 			</Box>
 
 			<ProductList
-				role='feed'
 				first={relatedProductCount}
 				channel={CHANNEL}
 				filterArgs={{ categories: product.category.id }}
 			/>
-		</>
+		</Box>
 	);
 }
 

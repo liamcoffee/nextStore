@@ -56,9 +56,10 @@ export default function Home() {
 					alignItems='center'
 					justifyContent='center'
 					p='8'
+					role='banner'
 				>
 					{shop.name && (
-						<Text text='h1' as='h1' color='white' textShadow='1px 1px #000'>
+						<Text text='hero' as='h1' color='white' textShadow='1px 1px #000'>
 							{shop.headerText}
 						</Text>
 					)}

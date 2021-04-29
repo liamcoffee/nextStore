@@ -4,7 +4,7 @@ import { Box } from '@components';
 import { useQuery } from '@apollo/client';
 import { PRODUCTS } from '@queries';
 export const ProductList = ({ channel, first, filterArgs }) => {
-	/* In a larger projec this would be moved to a custom hook
+	/* In a larger project this would be moved to a custom hook
 	incase you wanted another similar component such as productGrid
 	*/
 	const { data, error, loading } = useQuery(PRODUCTS, {

@@ -16,7 +16,7 @@ export const Product = ({ product }) => {
 	if (!product) return null;
 	return (
 		<Link href={`/products/${product.category.slug}/${product.slug}`}>
-			<ProductWrap>
+			<ProductWrap role='listitem'>
 				{product?.thumbnail?.url && (
 					<ProductGridImg
 						src={product.thumbnail.url}

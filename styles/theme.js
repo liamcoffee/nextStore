@@ -4,6 +4,7 @@ const calculateLineHeight = (fontSize, lineHeight) =>
 const calculateRem = (px) => `${px / 16}rem`;
 
 const fontSizes = {
+	hero: calculateRem(50),
 	h1: calculateRem(30),
 	h2: calculateRem(18),
 	h3: calculateRem(16),
@@ -15,6 +16,7 @@ const fontSizes = {
 
 const lineHeights = {
 	// LineHeightPx / SizePx
+	hero: calculateLineHeight(50, 55),
 	h1: calculateLineHeight(30, 35),
 	h2: calculateLineHeight(18, 20),
 	h3: calculateLineHeight(16, 18),
@@ -47,6 +49,7 @@ export const theme = {
 	fontWeights,
 	lineHeights,
 	text: {
+		hero: textStyle('hero'),
 		h1: textStyle('h1'),
 		h2: textStyle('h2'),
 		h3: textStyle('h3'),

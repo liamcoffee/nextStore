@@ -26,7 +26,7 @@ const NavItem = styled.li`
 	padding: ${(props) => props.theme.space[3]};
 	cursor: pointer;
 	transition: all 0.2s ease;
-
+	background-color: ${(props) => props.theme.colors.black};
 	&:hover {
 		color: ${(props) => props.theme.colors.black};
 		background-color: ${(props) => props.theme.colors.white};
@@ -52,8 +52,8 @@ export const NavBar = () => {
 				px={6}
 			>
 				<Link href={`/`}>
-					<a>
-						<Image src='/logo.svg' height={80} width={230} />
+					<a aria-label='lush' title='lush'>
+						<Image src='/logo.svg' alt='lush store' height={80} width={230} />
 					</a>
 				</Link>
 
@@ -72,7 +72,7 @@ export const NavBar = () => {
 					<NavItem>Soaps</NavItem>
 					<NavItem>Bath bombs</NavItem>
 					<NavItem>
-						<BasketIcon src='/../public/basket.png' height={30} width={30} />
+						<BasketIcon src='/basket.png' alt='basket' height={30} width={30} />
 					</NavItem>
 				</Box>
 			</Box>
