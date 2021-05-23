@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"~/*": ["./*"],
+			"@components": ["./components"],
+			"@pages/*": ["pages/*"],
+			"@queries*": ["queries/"],
+			"@lib/*": ["lib/*"],
+			"@hooks/*": ["hooks/*"],
+			"@styles/*": ["styles/*"]
+		},
+
+		"module": "esnext",
+		"target": "esnext",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve"
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.js"],
+	"exclude": ["node_modules"],
+	"allowJs": true
+}

@@ -1,0 +1,14 @@
+overwrite: true
+schema: 'https://twstg2.eu.saleor.cloud/graphql/'
+documents: 'queries/*.js'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - 'typescript-document-nodes'
+      - 'fragment-matcher'
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'

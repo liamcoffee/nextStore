@@ -1,5 +1,14 @@
 {
   "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-typescript",
     "next/babel"
   ],
   "plugins": [
@@ -10,6 +19,7 @@
         "displayName": true,
         "preprocess": false
       }
-    ]
+    ],
+    "@babel/plugin-transform-typescript"
   ]
 }
